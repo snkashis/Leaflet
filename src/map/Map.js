@@ -192,6 +192,7 @@ L.Map = L.Class.extend({
 	},
 
 	hasLayer: function (layer) {
+		if (!layer) { return false; }
 		var id = L.stamp(layer);
 		return this._layers.hasOwnProperty(id);
 	},
