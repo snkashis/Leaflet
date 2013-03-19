@@ -48,12 +48,12 @@ L.Path = (L.Path.SVG && !window.L_PREFER_CANVAS) || !L.Browser.canvas ? L.Path :
 	_requestUpdate: function () {
 		if (this._map && !L.Path._updateRequest) {
 			L.Path._updateRequest = L.Util.requestAnimFrame(this._fireMapMoveEnd, this._map);
+			this.fire('moveend');
 		}
 	},
 
 	_fireMapMoveEnd: function () {
 		L.Path._updateRequest = null;
-		this.fire('moveend');
 	},
 
 	_initElements: function () {

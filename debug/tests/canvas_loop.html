@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet debug page</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../../dist/leaflet.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" href="../../dist/leaflet.ie.css" /><![endif]-->
+
+    <link rel="stylesheet" href="../css/screen.css" />
+    <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.0.js'></script>
+
+    <script>
+        L_PREFER_CANVAS = true;
+        $(document).ready(function() {
+
+
+        var map,
+            osm,
+            pointToLayer;
+
+        map = new L.Map("map");
+
+        pointToLayer = function (feature, latlng) {
+             return new L.CircleMarker(latlng);
+        };
+
+        osm = new 
+        L.TileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+             minZoom: 1,
+             maxZoom: 18
+        });
+        map.addLayer(osm);
+
+        map.setView(new L.LatLng(-27.4667, 153.0333), 17);
+        map.on("moveend", function () {
+            console.log("moveend");
+        });
+        map.addLayer(L.GeoJSON.geometryToLayer({
+             "type": "Feature",
+             "properties": {},
+             "geometry": {
+                 "type": "Point",
+                 "coordinates": [153.03405, -27.46685]
+             },
+             "id": 1
+        }, pointToLayer));
+
+
+        L.circleMarker(map.getCenter()).addTo(map);
+
+
+        });
+    </script>
+
+
+    <script type="text/javascript" src="../../build/deps.js"></script>
+    <script src="../leaflet-include.js"></script>
+</head>
+<body>
+    <div id="map"></div>
+</body>
+</html>
