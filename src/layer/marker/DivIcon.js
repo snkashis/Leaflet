@@ -32,11 +32,17 @@ L.DivIcon = L.Icon.extend({
 		}
 
 		this._setIconStyles(div, 'icon');
+		this._div = div;
 		return div;
 	},
 
 	createShadow: function () {
 		return null;
+	},
+
+	setContent: function (content) {
+		this._div.innerHTML = content;
+		return this;
 	}
 });
 
